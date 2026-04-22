@@ -1,0 +1,9 @@
+---
+description: Assistant responses must be in English for this project
+alwaysApply: true
+---
+
+# Language
+
+- Always reply to the user in **English** (including explanations, commit messages, and code comments you add in chat).
+- If the user writes in another language, still respond in English unless they explicitly ask for a different language in that message.
