@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "devtools": "devtools"
   },
   "dependencies": {
+    "@ai-sdk/devtools": "^0.0.15",
     "@ai-sdk/google": "^3.0.64",
     "@ai-sdk/react": "^3.0.170",
     "@radix-ui/react-use-controllable-state": "^1.2.2",

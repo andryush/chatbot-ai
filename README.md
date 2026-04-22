@@ -9,7 +9,7 @@ A **Next.js** chat interface with **streaming** Gemini responses, powered by the
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Bun](https://img.shields.io/badge/Bun-package%20manager-000?logo=bun)](https://bun.sh/)
 
-[Features](#features) · [Stack](#stack) · [Quick start](#quick-start) · [Architecture](#architecture) · [Project layout](#project-layout) · [Scripts](#scripts) · [Deployment](#deployment)
+[Features](#features) · [Stack](#stack) · [Quick start](#quick-start) · [Architecture](#architecture) · [Project layout](#project-layout) · [Scripts](#scripts) · [AI SDK DevTools](#ai-sdk-devtools) · [Deployment](#deployment)
 
 </div>
 
@@ -20,7 +20,7 @@ A **Next.js** chat interface with **streaming** Gemini responses, powered by the
 - **Streaming chat** — `streamText` on the server, `useChat` on the client; the UI updates as tokens arrive.
 - **Google Gemini** — default model **Gemini 2.5 Flash**; the allowlist and labels live in one place: [`src/lib/chat-models.ts`](src/lib/chat-models.ts).
 - **Rich message rendering** — [Streamdown](https://github.com/vercel/streamdown) with add-ons for code, math, Mermaid, and CJK, wired through the `ai-elements` components.
-- **Polished input** — attachments, screenshot capture, drag-and-drop, model picker, and a “web search” toggle in the UI (see [`PromptInputWidget`](src/components/widgets/PromptInput/PromptInput.tsx)).
+- **Polished input** — attachments, screenshot capture, drag-and-drop, model picker, and a “web search” toggle in the UI (see [`PromptInputWidget`](src/components/widgets/PromptInput/PromptInputWidget.tsx)).
 - **Theming & typography** — Tailwind CSS v4, shadcn-style primitives, Geist / Inter in [`src/app/layout.tsx`](src/app/layout.tsx).
 
 ## Stack
@@ -112,6 +112,22 @@ flowchart LR
 | `bun run start`| Run the production build |
 | `bun run lint` | `biome check` |
 | `bun run format` | `biome format --write` |
+| `bun run devtools` | Start the [AI SDK DevTools](https://www.npmjs.com/package/@ai-sdk/devtools) web UI (run in a second terminal) |
+
+## AI SDK DevTools
+
+Optional local inspector for `streamText` / `generateText`: prompts, tool calls, usage, and timing. The chat route already wraps the model with `devToolsMiddleware()` in [`src/app/api/chat/route.ts`](src/app/api/chat/route.ts).
+
+1. Start the app: `bun run dev` (see [Quick start](#quick-start)).
+2. In **another** terminal, start the viewer:
+
+   ```bash
+   bun run devtools
+   ```
+
+3. Open [http://localhost:4983](http://localhost:4983) to browse captured runs.
+
+The CLI reads the local capture file (under `.devtools/` in the project). DevTools is for **local development only**; do not enable the viewer in production. When you are done, stop the `devtools` process with <kbd>Ctrl</kbd>+<kbd>C</kbd> in that terminal.
 
 ## Model configuration
 
